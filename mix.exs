@@ -37,7 +37,8 @@ defmodule Moip.Mixfile do
       {:poison, "~> 3.0"},
       {:secure_random, "~> 0.5"},
       {:brcpfcnpj, "~> 0.1.0"},
-      {:faker, "~> 0.8", only: :test}
+      {:faker, "~> 0.8", only: :test},
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 
