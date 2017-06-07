@@ -2,6 +2,7 @@
 
 O jeito mais simples e rápido de integrar o Moip e sua aplicação Elixir
 
+Segue a documentação em https://hexdocs.pm/moip/api-reference.html
 
 ## Instalação
 
@@ -40,11 +41,10 @@ O jeito mais simples e rápido de integrar o Moip e sua aplicação Elixir
 
 #### Criar um plano
 
-Basta criar um mapa com os atributos do plano e se tudo der certo o retorno
-será ``` {:ok, %{"message" => "Plano criado com sucesso"}} ```
+##### Response
+``` {:ok, %{"message" => "Plano criado com sucesso"}} ```
 
-
-Exemplo:
+##### Exemplo:
 
 ```elixir
   plan =  %{code: "plan code", name: "plan name", amount: 1990, status: "ACTIVE", payment_method: "CREDIT_CARD" }
@@ -56,14 +56,12 @@ Exemplo:
    end
 ```
 
-#### Listar um Plano
+#### Listar Planos
 
-Ao chamar o método list retornamos a lista de planos
-
+##### Response
 ``` {:ok, [%Moip.Resource.Plan{}]} ```
 
-
-Exemplo:
+##### Exemplo:
 
 ```elixir
   case Moip.Api.Assinaturas.V1.Plan.list() do

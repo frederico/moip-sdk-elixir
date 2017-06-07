@@ -55,7 +55,7 @@ defmodule Moip.Mixfile do
         description: "Moip Elixir SDK",
         files: ["lib", "config", "mix.exs", "README*", "LICENSE*"],
         maintainers: ["Frederico Macedo <frederico@negociosimples.com.br>"],
-        links: %{"GitHub" => "https://github.com/frederico/moip-sdk-elixir"}
+        links: %{"GitHub" => "https://github.com/frederico/moip-sdk-elixir", "Docs" => "https://hexdocs.pm/moip/api-reference.html"}
     ]
   end
 end
