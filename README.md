@@ -1,6 +1,7 @@
-# Moip
+# Moip SDK Elixir
 
 O jeito mais simples e rápido de integrar o Moip e sua aplicação Elixir
+
 
 ## Instalação
 
@@ -31,4 +32,44 @@ O jeito mais simples e rápido de integrar o Moip e sua aplicação Elixir
  config :moip,
    basic_auth_token: '<seu token>',
    basic_auth_secret: '<sua secret auth>'
+```
+
+## Moip v1 Assinaturas
+
+### Planos
+
+#### Criar um plano
+
+Basta criar um mapa com os atributos do plano e se tudo der certo o retorno
+será ``` {:ok, %{"message" => "Plano criado com sucesso"}} ```
+
+
+Exemplo:
+
+```elixir
+  plan =  %{code: "plan code", name: "plan name", amount: 1990, status: "ACTIVE", payment_method: "CREDIT_CARD" }
+  case Moip.Api.Assinaturas.V1.Plan.create(plan) do
+     {:ok, response} ->
+       response
+     {:error, errors} ->
+       errors
+   end
+```
+
+#### Listar um Plano
+
+Ao chamar o método list retornamos a lista de planos
+
+``` {:ok, [%Moip.Resource.Plan{}]} ```
+
+
+Exemplo:
+
+```elixir
+  case Moip.Api.Assinaturas.V1.Plan.list() do
+     {:ok, response} ->
+       response
+     {:error, errors} ->
+       errors
+   end
 ```
