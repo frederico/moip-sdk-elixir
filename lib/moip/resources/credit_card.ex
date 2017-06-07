@@ -1,7 +1,7 @@
 defmodule Moip.Resource.CreditCard do
   defstruct [ :holder_name, :number, :expiration_month, :expiration_year ]
  @moduledoc """
-      Representação de um cartão de crédito
+      Representação de cartão de crédito
     """
 
     @doc """

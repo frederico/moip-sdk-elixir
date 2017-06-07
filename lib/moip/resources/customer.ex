@@ -3,4 +3,8 @@ defmodule Moip.Resource.Customer do
     :amount, :billing_cycles, :code, :creation_date, :description, :id,
     :interval, :max_qty, :name, :payment_method, :setup_fee, :status, :trial
   ]
+
+  @moduledoc """
+    Representação de assinante
+  """
 end

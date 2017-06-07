@@ -1,11 +1,15 @@
 defmodule Moip.Mixfile do
   use Mix.Project
 
+  @version "0.2.0"
+  @github "https://github.com/frederico/moip-sdk-elixir"
+
   def project do
     [app: :moip,
-     version: "0.1.0",
+     version: @version,
      elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
+     docs: docs(),
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      package: package(),
@@ -42,9 +46,20 @@ defmodule Moip.Mixfile do
     ]
   end
 
+    defp docs do
+    [
+      main: "readme",
+      source_ref: "v#{@version}",
+      source_url: @github,
+      extras: [
+        "README.md"
+      ]
+    ]
+  end
+
   defp description do
     """
-    A few sentences (a paragraph) describing the project.
+    Biblioteca para utulizar as Api's do Moip (https://www.moip.com.br).
     """
   end
 
@@ -55,7 +70,7 @@ defmodule Moip.Mixfile do
         description: "Moip Elixir SDK",
         files: ["lib", "config", "mix.exs", "README*", "LICENSE*"],
         maintainers: ["Frederico Macedo <frederico@negociosimples.com.br>"],
-        links: %{"GitHub" => "https://github.com/frederico/moip-sdk-elixir", "Docs" => "https://hexdocs.pm/moip/api-reference.html"}
+        links: %{"GitHub" => @github, "Docs" => "https://hexdocs.pm/moip/api-reference.html"}
     ]
   end
 end

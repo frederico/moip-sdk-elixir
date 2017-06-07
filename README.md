@@ -37,14 +37,18 @@ Segue a documentação em https://hexdocs.pm/moip/api-reference.html
 
 ## Moip v1 Assinaturas
 
-### Planos
 
-#### Criar um plano
+## Planos
 
-##### Response
+
+### Criar um plano
+
+
+#### Response
 ``` {:ok, %{"message" => "Plano criado com sucesso"}} ```
 
-##### Exemplo:
+
+#### Exemplo:
 
 ```elixir
   plan =  %{code: "plan code", name: "plan name", amount: 1990, status: "ACTIVE", payment_method: "CREDIT_CARD" }
@@ -56,12 +60,15 @@ Segue a documentação em https://hexdocs.pm/moip/api-reference.html
    end
 ```
 
-#### Listar Planos
 
-##### Response
+### Listar Planos
+
+
+#### Response
 ``` {:ok, [%Moip.Resource.Plan{}]} ```
 
-##### Exemplo:
+
+#### Exemplo:
 
 ```elixir
   case Moip.Api.Assinaturas.V1.Plan.list() do

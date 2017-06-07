@@ -4,7 +4,7 @@ defmodule Moip.Resource.Plan do
     :interval, :max_qty, :name, :payment_method, :setup_fee, :status, :trial
   ]
    @moduledoc """
-      Representação de um plano
+      Representação de plano
     """
 
     @doc """
