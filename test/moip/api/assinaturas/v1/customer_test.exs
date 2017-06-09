@@ -63,11 +63,13 @@ defmodule Moip.Api.Assinaturas.V1.CustomerTest do
   describe "Moip.Api.Assinaturas.V1.Customer.update" do
     test "with existent customer should update customer" do
       customer = random_customer
-      Moip.Api.Assinaturas.V1.Customer.create(customer)
-      new_customer_attributes = (Map.drop(random_customer, [:code]) |> Map.merge(%{code: customer[:code]}))
-      customer_update_response = Moip.Api.Assinaturas.V1.Customer.update(customer[:code], new_customer_attributes)
-      send self(), customer_update_response
-      assert_received {:ok, _}
+      case Moip.Api.Assinaturas.V1.Customer.create(customer) do
+        _ ->
+          new_customer_attributes = (Map.drop(random_customer, [:code]) |> Map.merge(%{code: customer[:code]}))
+          customer_update_response = Moip.Api.Assinaturas.V1.Customer.update(customer[:code], new_customer_attributes)
+          send self(), customer_update_response
+          assert_received {:ok, _}
+      end
     end
     test "with inexistent customer should return :error" do
       plan_code = "test-code-#{SecureRandom.uuid}"
@@ -80,10 +82,12 @@ defmodule Moip.Api.Assinaturas.V1.CustomerTest do
     describe "Moip.Api.Assinaturas.V1.Customer.update_billing_info" do
       test "with existent customer should update customer" do
         customer = random_customer
-        Moip.Api.Assinaturas.V1.Customer.create(customer)
-        customer_update_response = Moip.Api.Assinaturas.V1.Customer.update_billing_info(customer[:code], valid_random_billing_info)
-        send self(), customer_update_response
-        assert_received {:ok, _}
+        case Moip.Api.Assinaturas.V1.Customer.create(customer) do
+          _ ->
+            customer_update_response = Moip.Api.Assinaturas.V1.Customer.update_billing_info(customer[:code], valid_random_billing_info)
+            send self(), customer_update_response
+            assert_received {:ok, _}
+        end
       end
       test "with inexistent customer should return :error" do
         plan_code = "test-code-#{SecureRandom.uuid}"
