@@ -1,5 +1,7 @@
 # Moip SDK Elixir
 
+[![Build Status](https://travis-ci.org/frederico/moip-sdk-elixir.svg?branch=master)](https://travis-ci.org/frederico/moip-sdk-elixir)
+
 O jeito mais simples e rápido de integrar o Moip e sua aplicação Elixir
 
 Segue a documentação em https://hexdocs.pm/moip/api-reference.html
@@ -24,7 +26,11 @@ Segue a documentação em https://hexdocs.pm/moip/api-reference.html
     end
     ```
 
-  * Adiocione a sua chave moip em `config/prod.exs` ou `config/dev.exs`
+  * Configura suas chaves moip:
+  
+    * Adiocione a sua chave moip em `config/prod.exs` e `config/dev.exs` *OU*
+    
+    * Utilize variáveis de ambiente `MOIP_BASIC_AUTH_TOKEN` e `MOIP_BASIC_AUTH_SECRET`
 
  ```elixir
 

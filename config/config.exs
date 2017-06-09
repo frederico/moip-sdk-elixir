@@ -27,4 +27,7 @@ use Mix.Config
 # Configuration from the imported file will override the ones defined
 # here (which is why it is important to import them last).
 #
-import_config "#{Mix.env}.exs"
+
+config :moip,
+  basic_auth_token: System.get_env("MOIP_BASIC_AUTH_TOKEN"),
+  basic_auth_secret: System.get_env("MOIP_BASIC_AUTH_SECRET")

@@ -1,6 +1,11 @@
 # Changelog
 
 History of the changes.
+## v0.4.0
+- Adicionada a Licença Apache
+- Alterada a configuração padrão para simplificar pro travis
+- Adicionado travis
+
 ## v0.3.0
 - Melhoria nos casos de teste
 - Inlusão do arquivo de Changelog
