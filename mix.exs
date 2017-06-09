@@ -1,7 +1,7 @@
 defmodule Moip.Mixfile do
   use Mix.Project
 
-  @version "0.2.0"
+  @version "0.3.0"
   @github "https://github.com/frederico/moip-sdk-elixir"
 
   def project do
