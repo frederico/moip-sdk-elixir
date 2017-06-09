@@ -5,6 +5,7 @@ History of the changes.
 - Adicionada a Licença Apache
 - Alterada a configuração padrão para simplificar pro travis
 - Adicionado travis
+- Testes reorganizados
 
 ## v0.3.0
 - Melhoria nos casos de teste
@@ -24,7 +25,7 @@ Versão inicial do SDK contendo:
     GET  /customer/:customer_code               - Moip.Api.Assinaturas.V1.Customer.find                - Encontrar um assinante
     PUT  /customer/:customer_code               - Moip.Api.Assinaturas.V1.Customer.update              - Atualizar um assinante
     PUT  /customer/:customer_code/billing_infos - Moip.Api.Assinaturas.V1.Customer.update_billing_info - Atualizar os dados de pagamento do assiante
-      
+
   - /plans
     GET  /plans                      - Moip.Api.Assinaturas.V1.Plan.list       - Lista de planos
     POST /plans                      - Moip.Api.Assinaturas.V1.Plan.create     - Criação de planos
@@ -41,5 +42,5 @@ Versão inicial do SDK contendo:
     PUT  /subscription/:subscription_code/suspend  - Moip.Api.Assinaturas.V1.Subscription.suspend  - Atualizar status de um assinatura para "SUSPENDED"
     PUT  /subscription/:subscription_code/activate - Moip.Api.Assinaturas.V1.Subscription.activate - Atualizar status de um assinatura para "ACTIVE"
     PUT  /subscription/:subscription_code/cancel   - Moip.Api.Assinaturas.V1.Subscription.cancel   - Atualizar status de um assinatura para "CANCELED"
- 
+
 - Todos os testes de todos os endpoints

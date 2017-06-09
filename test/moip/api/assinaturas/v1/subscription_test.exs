@@ -124,7 +124,7 @@ defmodule Moip.Api.Assinaturas.V1.SubscriptionTest do
       assert_received {:error, _}
     end
   end
-  describe "Moip.Api.Assinaturas.V1.Subscription.suspend, activate, cancel" do
+  describe "Moip.Api.Assinaturas.V1.Subscription.suspend" do
     test "test all status changes " do
       plan = valid_random_plan
       plan_code = plan[:code]
@@ -137,13 +137,45 @@ defmodule Moip.Api.Assinaturas.V1.SubscriptionTest do
             _ ->
               suspend_response = Moip.Api.Assinaturas.V1.Subscription.suspend(subscription[:code])
               send self(), suspend_response
-              assert_received {:ok, %{message: "Assinatura suspensa com sucesso"}}
-              activate_response = Moip.Api.Assinaturas.V1.Subscription.activate(subscription[:code])
-              send self(), activate_response
-              assert_received {:ok, %{message: "Assinatura reativada com sucesso"}}
+          end
+      end
+    end
+  end
+  describe "Moip.Api.Assinaturas.V1.Subscription.cancel" do
+    test "test all status changes " do
+      plan = valid_random_plan
+      plan_code = plan[:code]
+      amount = plan[:amount]
+
+      case Moip.Api.Assinaturas.V1.Plan.create(plan) do
+        _ ->
+          subscription = valid_random_subscription_with_non_existing_customer(plan_code, amount)
+          case Moip.Api.Assinaturas.V1.Subscription.create(subscription, true) do
+            _ ->
               cancelation_response = Moip.Api.Assinaturas.V1.Subscription.cancel(subscription[:code])
               send self(), cancelation_response
               assert_received {:ok, %{message: "Assinatura cancelada com sucesso"}}
+          end
+      end
+    end
+  end
+  describe "Moip.Api.Assinaturas.V1.Subscription.activate" do
+    test "test all status changes " do
+      plan = valid_random_plan
+      plan_code = plan[:code]
+      amount = plan[:amount]
+
+      case Moip.Api.Assinaturas.V1.Plan.create(plan) do
+        _ ->
+          subscription = valid_random_subscription_with_non_existing_customer(plan_code, amount)
+          case Moip.Api.Assinaturas.V1.Subscription.create(subscription, true) do
+            _ ->
+              case Moip.Api.Assinaturas.V1.Subscription.suspend(subscription[:code]) do
+                _ ->
+                  activate_response = Moip.Api.Assinaturas.V1.Subscription.activate(subscription[:code])
+                  send self(), activate_response
+                  assert_received {:ok, %{message: "Assinatura reativada com sucesso"}}
+              end
           end
       end
     end
