@@ -82,7 +82,7 @@ defmodule Moip.Api.Assinaturas.V1.PlanTest do
       plan = valid_random_plan
       plan_code = plan[:code]
       Moip.Api.Assinaturas.V1.Plan.create(plan)
-      update_params = %{name: "name-changed-#{plan_code}", amount: 2555}
+      update_params = %{name: "name-changed-#{plan_code}", amount: 10001}
       plan_response = Moip.Api.Assinaturas.V1.Plan.update(plan_code, update_params)
       send self(), plan_response
       assert_received {:ok, _}

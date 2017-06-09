@@ -106,7 +106,7 @@ defmodule Moip.TestUtils do
   def valid_random_plan do
     plan_code = "pc-#{SecureRandom.uuid}"
     name = "name-#{SecureRandom.uuid}"
-    amount = Integer.to_string(2455)
+    amount = Integer.to_string(10000)
     status = "ACTIVE"
     payment_method = "CREDIT_CARD"
 
@@ -115,7 +115,7 @@ defmodule Moip.TestUtils do
   def valid_inactive_random_plan do
       plan_code = "pc-#{SecureRandom.uuid}"
       name = "name-#{SecureRandom.uuid}"
-      amount = Integer.to_string(2455)
+      amount = Integer.to_string(10000)
       status = "INACTIVE"
       payment_method = "CREDIT_CARD"
 

@@ -40,7 +40,7 @@ defmodule Moip.Mixfile do
       {:httpoison, "~> 0.11.1"},
       {:poison, "~> 3.0"},
       {:secure_random, "~> 0.5"},
-      {:brcpfcnpj, "~> 0.1.0"},
+      {:brcpfcnpj, "~> 0.1.0",only: :test},
       {:faker, "~> 0.8", only: :test},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
