@@ -71,13 +71,16 @@ defmodule Moip.Api.Assinaturas.V1.SubscriptionTest do
       plan_code = plan[:code]
       amount = plan[:amount]
 
-      Moip.Api.Assinaturas.V1.Plan.create(plan)
-      subscription = valid_random_subscription_with_non_existing_customer(plan_code, amount)
-      Moip.Api.Assinaturas.V1.Subscription.create(subscription, true)
-
-      subscription_found = Moip.Api.Assinaturas.V1.Subscription.find(subscription[:code])
-      send self(), subscription_found
-      assert_received {:ok, _}
+      case Moip.Api.Assinaturas.V1.Plan.create(plan) do
+        _ ->
+          subscription = valid_random_subscription_with_non_existing_customer(plan_code, amount)
+          case Moip.Api.Assinaturas.V1.Subscription.create(subscription, true) do
+            _ ->
+              subscription_found = Moip.Api.Assinaturas.V1.Subscription.find(subscription[:code])
+              send self(), subscription_found
+              assert_received {:ok, _}
+          end
+      end
     end
 
     test "with inexistent customer should return :error" do
@@ -90,23 +93,28 @@ defmodule Moip.Api.Assinaturas.V1.SubscriptionTest do
 
 
   describe "Moip.Api.Assinaturas.V1.Subscription.update" do
-
     test "with existent customer should update subscription" do
       plan = valid_random_plan
       plan_code = plan[:code]
       amount = plan[:amount]
 
-      Moip.Api.Assinaturas.V1.Plan.create(plan)
-      subscription = valid_random_subscription_with_non_existing_customer(plan_code, amount)
-      Moip.Api.Assinaturas.V1.Subscription.create(subscription, true)
-      new_plan = valid_random_plan
-      new_plan_code = new_plan[:code]
-      new_amount = new_plan[:amount]
-      Moip.Api.Assinaturas.V1.Plan.create(new_plan)
-      new_subscription_attributes = %{plan: %{code: new_plan_code}, amount: new_amount }
-      subscription_response = Moip.Api.Assinaturas.V1.Subscription.update(subscription[:code], new_subscription_attributes)
-      send self(), subscription_response
-      assert_received {:ok, %{message: "Assinatura atualizada com sucesso"}}
+      case Moip.Api.Assinaturas.V1.Plan.create(plan) do
+        _ ->
+          subscription = valid_random_subscription_with_non_existing_customer(plan_code, amount)
+          case Moip.Api.Assinaturas.V1.Subscription.create(subscription, true) do
+            _ ->
+              new_plan = valid_random_plan
+              new_plan_code = new_plan[:code]
+              new_amount = new_plan[:amount]
+              case Moip.Api.Assinaturas.V1.Plan.create(new_plan) do
+                _ ->
+                  new_subscription_attributes = %{plan: %{code: new_plan_code}, amount: new_amount }
+                  subscription_response = Moip.Api.Assinaturas.V1.Subscription.update(subscription[:code], new_subscription_attributes)
+                  send self(), subscription_response
+                  assert_received {:ok, %{message: "Assinatura atualizada com sucesso"}}
+              end
+          end
+      end
     end
 
     test "with inexistent customer should return :error" do
@@ -122,18 +130,22 @@ defmodule Moip.Api.Assinaturas.V1.SubscriptionTest do
       plan_code = plan[:code]
       amount = plan[:amount]
 
-      Moip.Api.Assinaturas.V1.Plan.create(plan)
-      subscription = valid_random_subscription_with_non_existing_customer(plan_code, amount)
-      Moip.Api.Assinaturas.V1.Subscription.create(subscription, true)
-      suspend_response = Moip.Api.Assinaturas.V1.Subscription.suspend(subscription[:code])
-      send self(), suspend_response
-      assert_received {:ok, %{message: "Assinatura suspensa com sucesso"}}
-      activate_response = Moip.Api.Assinaturas.V1.Subscription.activate(subscription[:code])
-      send self(), activate_response
-      assert_received {:ok, %{message: "Assinatura reativada com sucesso"}}
-      cancelation_response = Moip.Api.Assinaturas.V1.Subscription.cancel(subscription[:code])
-      send self(), cancelation_response
-      assert_received {:ok, %{message: "Assinatura cancelada com sucesso"}}
+      case Moip.Api.Assinaturas.V1.Plan.create(plan) do
+        _ ->
+          subscription = valid_random_subscription_with_non_existing_customer(plan_code, amount)
+          case Moip.Api.Assinaturas.V1.Subscription.create(subscription, true) do
+            _ ->
+              suspend_response = Moip.Api.Assinaturas.V1.Subscription.suspend(subscription[:code])
+              send self(), suspend_response
+              assert_received {:ok, %{message: "Assinatura suspensa com sucesso"}}
+              activate_response = Moip.Api.Assinaturas.V1.Subscription.activate(subscription[:code])
+              send self(), activate_response
+              assert_received {:ok, %{message: "Assinatura reativada com sucesso"}}
+              cancelation_response = Moip.Api.Assinaturas.V1.Subscription.cancel(subscription[:code])
+              send self(), cancelation_response
+              assert_received {:ok, %{message: "Assinatura cancelada com sucesso"}}
+          end
+      end
     end
   end
 end
