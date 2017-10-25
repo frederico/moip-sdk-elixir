@@ -5,7 +5,7 @@ defmodule Moip.Http do
   end
 
   defp success(status, body) do
-    if String.strip(body) == "" do
+    if String.trim(body) == "" do
       {:ok, "{}"}
     else
       {:ok, Poison.decode!(body)}
