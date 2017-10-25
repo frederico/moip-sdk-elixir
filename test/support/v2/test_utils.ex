@@ -21,6 +21,7 @@ defmodule Moip.V2.TestUtils do
       number: valid_credit_card_number,
       expirationYear: expiration_year,
       expirationMonth: expiration_month,
+      cvc: "231",
       holder: %{
         fullname: Faker.Name.name,
         birthdate: "1988-12-30",
@@ -93,6 +94,26 @@ defmodule Moip.V2.TestUtils do
         }
       ],
       customer: random_customer()
+    }
+  end
+
+  def random_payment do
+    %{
+      installmentCount: 1,
+      statementDescriptor: "minhaLoja.com",
+      fundingInstrument: %{
+        method: "CREDIT_CARD",
+        creditCard: credit_card()
+      },
+      device: %{
+        ip: "127.0.0.1",
+        geolocation: %{
+          latitude: -33.867,
+          longitude: 151.206
+        },
+        userAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36",
+        fingerprint: "QAZXswedCVGrtgBNHyujMKIkolpQAZXswedCVGrtgBNHyujMKIkolpQAZXswedCVGrtgBNHyujMKIkolpQAZXswedCVGrtgBNHyujMKIkolp"
+      }
     }
   end
 

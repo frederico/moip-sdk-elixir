@@ -39,16 +39,27 @@ defmodule Moip.Http do
   def post(url, params) do
     header_options = Moip.Client.header_options
     options = [ssl: [{:versions, [:'tlsv1.2']}], recv_timeout: 50000]
-    case HTTPoison.post(url, Poison.encode!(params) , Map.to_list(header_options) , options) do
+    case HTTPoison.post(url, Poison.encode!(params), Map.to_list(header_options) , options) do
       {:ok, %HTTPoison.Response{status_code: status, body: body}} when status >= 200 and status < 300 -> success(status,body)
       {:ok, %HTTPoison.Response{status_code: status, body: body}} when (status >= 400 and status < 500) -> error(status, body)
       {:error, %HTTPoison.Error{reason: reason}} -> {:error, %{:code => 500, :message => reason} }
     end
   end
+
   def put(url, params) do
     header_options = Moip.Client.header_options
     options = [ssl: [{:versions, [:'tlsv1.2']}], recv_timeout: 50000]
-    case HTTPoison.put(url, Poison.encode!(params) , Map.to_list(header_options) , options) do
+    case HTTPoison.put(url, Poison.encode!(params), Map.to_list(header_options) , options) do
+      {:ok, %HTTPoison.Response{status_code: status, body: body}} when status >= 200 and status < 300 -> success(status,body)
+      {:ok, %HTTPoison.Response{status_code: status, body: body}} when (status >= 400 and status < 500) -> error(status, body)
+      {:error, %HTTPoison.Error{reason: reason}} -> {:error, %{:code => 500, :message => reason} }
+    end
+  end
+
+  def delete(url) do
+    header_options = Moip.Client.header_options
+    options = [ssl: [{:versions, [:'tlsv1.2']}], recv_timeout: 50000]
+    case HTTPoison.delete(url, Map.to_list(header_options) , options) do
       {:ok, %HTTPoison.Response{status_code: status, body: body}} when status >= 200 and status < 300 -> success(status,body)
       {:ok, %HTTPoison.Response{status_code: status, body: body}} when (status >= 400 and status < 500) -> error(status, body)
       {:error, %HTTPoison.Error{reason: reason}} -> {:error, %{:code => 500, :message => reason} }

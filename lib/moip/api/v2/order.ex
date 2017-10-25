@@ -7,5 +7,5 @@ defmodule Moip.Api.V2.Order do
 
   def list(), do: Moip.Http.get(url())
 
-  def url, do: '#{Moip.Api.V2.get_base_uri()}#{@base_path}'
+  def url, do: "#{Moip.Api.V2.get_base_uri()}#{@base_path}"
 end

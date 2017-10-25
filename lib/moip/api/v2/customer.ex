@@ -11,5 +11,5 @@ defmodule Moip.Api.V2.Customer do
 
   def remove_creditcard(creditcard_id), do: Moip.Http.delete("#{Moip.Api.V2.get_base_uri()}/fundinginstruments/#{creditcard_id}")
 
-  def url, do: '#{Moip.Api.V2.get_base_uri()}#{@base_path}'
+  def url, do: "#{Moip.Api.V2.get_base_uri()}#{@base_path}"
 end
