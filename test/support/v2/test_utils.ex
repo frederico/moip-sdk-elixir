@@ -73,4 +73,27 @@ defmodule Moip.V2.TestUtils do
   def random_customer_with_funding_instrument do
     Map.merge(random_customer(), %{fundingInstrument: valid_random_funding_instruments()})
   end
+
+  def random_order do
+    %{
+      ownId: "oo-#{SecureRandom.uuid}",
+      amount: %{
+        currency: "BRL",
+        subtotals: %{
+          shipping: 1000
+        }
+      },
+      items: [
+        %{
+          product: "Descrição do pedido",
+          category: "CLOTHING",
+          quantity: 1,
+          detail: "Mais info...",
+          price: 1000
+        }
+      ],
+      customer: random_customer()
+    }
+  end
+
 end
