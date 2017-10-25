@@ -73,18 +73,4 @@ defmodule Moip.V2.TestUtils do
   def random_customer_with_funding_instrument do
     Map.merge(random_customer(), %{fundingInstrument: valid_random_funding_instruments()})
   end
-
-   def valid_random_subscription_with_existing_customer(plan_code, amount, customer_code) do
-    subscription_code = "sc-#{SecureRandom.uuid}"
-    #TODO - when sandbox is fixed allow to random create as CREDIT_CARD or BOLETO
-    payment_method = "CREDIT_CARD"
-
-    plan = %{code: plan_code }
-    customer_attrs = %{ code: customer_code }
-
-    %{
-        code: subscription_code, amount: amount, payment_method: payment_method,
-        plan: plan, customer: customer_attrs
-    }
-  end
 end
