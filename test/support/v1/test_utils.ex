@@ -1,4 +1,4 @@
-defmodule Moip.TestUtils do
+defmodule Moip.V1.TestUtils do
   use ExUnit.CaseTemplate
 
   def basic_auth do

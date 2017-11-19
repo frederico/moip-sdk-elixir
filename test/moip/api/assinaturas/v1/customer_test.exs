@@ -1,5 +1,5 @@
 defmodule Moip.Api.Assinaturas.V1.CustomerTest do
-  import Moip.TestUtils
+  import Moip.V1.TestUtils
   use ExUnit.Case, async: true
 
   setup do
